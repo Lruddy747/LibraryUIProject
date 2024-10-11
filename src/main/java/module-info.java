@@ -10,6 +10,9 @@ module com.example.libraryui {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires java.sql;
+    requires java.desktop;
+    requires mysql.connector.j;
 
     opens com.example.libraryui to javafx.fxml;
     exports com.example.libraryui;

@@ -1,16 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.libraryui.LibraryController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="398.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.libraryui.LibraryController">
+  <content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="382.0" prefWidth="731.0">
+         <children>
+            <TableView fx:id="LibraryTable" prefHeight="384.0" prefWidth="586.0">
+              <columns>
+                <TableColumn fx:id="BIDCOL" prefWidth="97.0" text="Book ID" />
+                <TableColumn fx:id="BNCOL" prefWidth="160.0" text="Book Name" />
+                  <TableColumn fx:id="ALCOL" prefWidth="191.0" text="Author's Last Name" />
+                  <TableColumn fx:id="AvailableCOL" minWidth="1.0" prefWidth="103.0" text="Is It Available" />
+              </columns>
+            </TableView>
+            <Button fx:id="ConnectToLibrary" layoutX="595.0" layoutY="27.0" mnemonicParsing="false" onAction="#Connect" prefHeight="50.0" prefWidth="110.0" text="Connect to Library Database" wrapText="true" />
+            <Label fx:id="LabelConfirmation" layoutX="595.0" layoutY="18.0" prefHeight="68.0" prefWidth="130.0" text="Connected to Library" textAlignment="CENTER" visible="false">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <effect>
+                  <Lighting diffuseConstant="0.4" specularConstant="2.0" specularExponent="14.49">
+                     <bumpInput>
+                        <Shadow />
+                     </bumpInput>
+                     <light>
+                        <Light.Distant>
+                           <color>
+                              <Color red="0.7763158082962036" green="0.14376218616962433" blue="0.14376218616962433" />
+                           </color>
+                        </Light.Distant>
+                     </light>
+                  </Lighting>
+               </effect>
+            </Label>
+            <Label fx:id="CheckLabel" layoutX="595.0" layoutY="155.0" prefHeight="49.0" prefWidth="127.0" text="Enter the book ID you want to check out" wrapText="true" />
+            <TextField fx:id="CheckText" layoutX="589.0" layoutY="204.0" prefHeight="25.0" prefWidth="128.0" promptText="book ID" />
+            <Button fx:id="CheckoutButton" layoutX="620.0" layoutY="238.0" mnemonicParsing="false" onAction="#Checkout" text="Checkout" />
+         </children></AnchorPane>
+  </content>
+</ScrollPane>
