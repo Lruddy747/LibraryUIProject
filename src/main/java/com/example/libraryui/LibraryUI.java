@@ -67,7 +67,7 @@ public class LibraryUI extends Application {
         });
 
 
-        Scene scene = new Scene(pane,500,500);
+        Scene scene = new Scene(pane,500,200);
         stage.setScene(scene);
         stage.show();
 
