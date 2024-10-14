@@ -5,7 +5,6 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Light.Distant?>
 <?import javafx.scene.effect.Lighting?>
 <?import javafx.scene.effect.Shadow?>
@@ -45,9 +44,6 @@
                   </Lighting>
                </effect>
             </Label>
-            <Label fx:id="CheckLabel" layoutX="595.0" layoutY="155.0" prefHeight="49.0" prefWidth="127.0" text="Enter the book ID you want to check out" wrapText="true" />
-            <TextField fx:id="CheckText" layoutX="589.0" layoutY="204.0" prefHeight="25.0" prefWidth="128.0" promptText="book ID" />
-            <Button fx:id="CheckoutButton" layoutX="620.0" layoutY="238.0" mnemonicParsing="false" onAction="#Checkout" text="Checkout" />
          </children></AnchorPane>
   </content>
 </ScrollPane>

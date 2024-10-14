@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="396.0" prefWidth="921.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.libraryui.AdminUIController">
+    <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="397.0" prefWidth="934.0">
+            <children>
+                <TableView fx:id="LibraryTable" prefHeight="384.0" prefWidth="586.0">
+                    <columns>
+                        <TableColumn fx:id="BIDCOL" prefWidth="97.0" text="Book ID" />
+                        <TableColumn fx:id="BNCOL" prefWidth="160.0" text="Book Name" />
+                        <TableColumn fx:id="ALCOL" prefWidth="191.0" text="Author's Last Name" />
+                        <TableColumn fx:id="AvailableCOL" minWidth="1.0" prefWidth="103.0" text="Is It Available" />
+                    </columns>
+                </TableView>
+                <Button fx:id="ConnectToLibrary" layoutX="595.0" layoutY="27.0" mnemonicParsing="false" onAction="#Connect" prefHeight="50.0" prefWidth="110.0" text="Connect to Library Database" wrapText="true" />
+                <Label fx:id="LabelConfirmation" layoutX="595.0" layoutY="18.0" prefHeight="68.0" prefWidth="130.0" text="Connected to Library" textAlignment="CENTER" visible="false">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                    <effect>
+                        <Lighting diffuseConstant="0.4" specularConstant="2.0" specularExponent="14.49">
+                            <bumpInput>
+                                <Shadow />
+                            </bumpInput>
+                            <light>
+                                <Light.Distant>
+                                    <color>
+                                        <Color red="0.7763158082962036" green="0.14376218616962433" blue="0.14376218616962433" />
+                                    </color>
+                                </Light.Distant>
+                            </light>
+                        </Lighting>
+                    </effect>
+                </Label>
+                <Label fx:id="CheckLabel" layoutX="595.0" layoutY="155.0" prefHeight="49.0" prefWidth="257.0" text="Enter the book ID, Book name, author and whether or not it's available" wrapText="true" />
+                <TextField fx:id="CheckBookID" layoutX="589.0" layoutY="204.0" prefHeight="25.0" prefWidth="128.0" promptText="book ID" />
+                <Button fx:id="ConfirmButton" layoutX="738.0" layoutY="310.0" mnemonicParsing="false" onAction="#handleAddButton" text="Checkout" />
+            <TextField fx:id="CheckTextBook" layoutX="589.0" layoutY="240.0" prefHeight="25.0" prefWidth="128.0" promptText="book name" />
+            <TextField fx:id="CheckTextAuthor" layoutX="589.0" layoutY="275.0" prefHeight="25.0" prefWidth="128.0" promptText="Author's last name" />
+            <TextField fx:id="CheckTextAvailable" layoutX="589.0" layoutY="310.0" prefHeight="25.0" prefWidth="128.0" promptText="Is it available" />
+            </children></AnchorPane>
+    </content>
+</ScrollPane>

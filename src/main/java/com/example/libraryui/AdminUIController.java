@@ -27,7 +27,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class LibraryController {
+public class AdminUIController {
 
     @FXML
     private AnchorPane anchorPane;
@@ -45,7 +45,16 @@ public class LibraryController {
     TableColumn<LibInventory, String> ALCOL;
     @FXML
     TableColumn<LibInventory, String> AvailableCOL;
-
+    @FXML
+    Button ConfirmButton;
+    @FXML
+    TextField CheckBookID;
+    @FXML
+    TextField CheckTextBook;
+    @FXML
+    TextField CheckTextAuthor;
+    @FXML
+    TextField CheckTextAvailable;
 
     ObservableList<LibInventory> inventoryList = FXCollections.observableArrayList();
 
@@ -53,6 +62,10 @@ public class LibraryController {
 
 
     public void Connect() throws ClassNotFoundException, SQLException {
+        CheckBookID.clear();
+        CheckTextBook.clear();
+        CheckTextAuthor.clear();
+        CheckTextAvailable.clear();
 
         BIDCOL.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getBookID()).asObject());
         BNCOL.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getBookName()));
@@ -91,10 +104,68 @@ public class LibraryController {
         connection.close();
 
 
-
     }
 
+    public void handleAddButton() throws SQLException, ClassNotFoundException {
+        String name = CheckTextBook.getText();
+        int ID = Integer.parseInt(CheckBookID.getText());
+        String Author = CheckTextAuthor.getText();
 
+        int Available = Integer.parseInt(CheckTextAvailable.getText());
+
+        //int Available = Integer.parseInt(CheckTextAvailable.getText());
+        addBook(name, ID, Author, Available);
+    }
+
+    public void addBook(String name, int ID, String Author, int Available) throws ClassNotFoundException, SQLException {
+
+        try {
+
+            BIDCOL.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getBookID()).asObject());
+            BNCOL.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getBookName()));
+            ALCOL.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getBookAuthor()));
+            AvailableCOL.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getIsAvailable()));
+
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/library", "root", "WhiteTruck1304");
+            Statement statement = connection.createStatement();
+
+            String sql = "INSERT INTO inventory (bookID, bookName, authorLname, isAvailable) VALUES (?, ?, ?, ?)";
+
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, ID);
+            preparedStatement.setString(2, name);
+            preparedStatement.setString(3, Author);
+
+
+            preparedStatement.setInt(4, Available);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+            String isAvailable;
+            switch(CheckTextAvailable.getText()){
+                case "1":
+                    isAvailable = "yes";
+                    inventoryList.add(new LibInventory(ID, name, Author, isAvailable));
+                    LibraryTable.setItems(inventoryList);
+                    break;
+                case "0":
+                    isAvailable = "no";
+                    inventoryList.add(new LibInventory(ID, name, Author, isAvailable));
+                    LibraryTable.setItems(inventoryList);
+                    break;
+            }
+
+            connection.close();
+
+            CheckBookID.clear();
+            CheckTextBook.clear();
+            CheckTextAuthor.clear();
+            CheckTextAvailable.clear();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
 
